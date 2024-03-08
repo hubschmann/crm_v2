@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -12,7 +12,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
-import { AppBar, Box, Divider, Drawer, Toolbar, Typography, Menu, MenuItem } from '@mui/material';
+import { AppBar, Box, Divider, Drawer, Toolbar, Typography } from '@mui/material';
 
 // molecules
 import Search from '../../molecules/Search';
@@ -36,7 +36,6 @@ const marginIconMenuItem = '15px'
 
 const Navigation = ({ children }) => {
   const [regions, setRegions] = useState([]);
-  const [selectedRegionId, setSelectedRegionId] = useState(null);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const navigate = useNavigate();
@@ -45,6 +44,7 @@ const Navigation = ({ children }) => {
         API.getRegions().then(response => setRegions(response.data));
     }, []);
 
+  
 
   const handleDrawerClose = () => {
       setIsClosing(true);
@@ -98,7 +98,7 @@ const Navigation = ({ children }) => {
                 }}>Заявки
         </Divider>
   
-        {/* підключаю список пунктів меню повʼязани їз заявками */}
+        {/* підключаю список пунктів меню повʼязаниїз заявками */}
         <MenuItemsTickets regions={regions} />
   
       <Divider />
