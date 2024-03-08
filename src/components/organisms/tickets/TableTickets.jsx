@@ -11,11 +11,12 @@ import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
-import { Box, Typography, Grid, Chip } from '@mui/material';
+import { Box, Typography, Grid, Chip, Input } from '@mui/material';
 
 // components local
 import TablePreviewRegistration from './TablePreviewRegistration';
 import TableDetailTicket from './TableDetailTicket';
+import CalendarPicker from '../../molecules/CalendarPicker';
 
 // utils
 import getTypeTicket from '../../../utils/checkTypeTicket';
@@ -28,6 +29,7 @@ import API from '../../../database/api'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { CheckCircleOutline, ErrorOutline, Event } from '@mui/icons-material';
+
 
 
 
@@ -115,6 +117,13 @@ export default function TableTickets({regionId}) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [connectionTickets, setConnectionTickets] = useState([]);
+  
+  
+  // фільтрація у таблиці по селам
+  const [selectedCity, setSelectedCity] = useState("");
+  const handleCityFilterChange = (event) => {
+    setSelectedCity(event.target.value); // Збережіть вибраний населений пункт для фільтрації
+  };
 
 
   useEffect(() => {
@@ -141,21 +150,31 @@ export default function TableTickets({regionId}) {
             <TableRow>
               <TableCell />
               <TableCell align="right">Тип</TableCell>
-              <TableCell align="right">Населений пункт</TableCell>
+              <TableCell align="right">
+                <Input
+                  placeholder='Населений пункт'
+                  label="Фільтр по населеному пункту"
+                  value={selectedCity}
+                  onChange={handleCityFilterChange}
+                />
+              </TableCell>
               <TableCell align="right">Адреса</TableCell>
               <TableCell align="right">Телефон</TableCell>
               <TableCell align="right">
                   <IconButton aria-label="calendar">
-                    <Event />
+                    <CalendarPicker />
                   </IconButton>
                   Дата
               </TableCell>
               <TableCell align="right">Статус</TableCell>
             </TableRow>
+            {/* Додайте фільтр для населеного пункту */}
+            
           </TableHead>
           
           <TableBody>
             {connectionTickets
+              .filter(ticket => !selectedCity || ticket.city.name.toLowerCase().includes(selectedCity.toLowerCase())) // Застосуйте фільтрацію
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((ticket) => (
                 <Row key={ticket.id} ticket={ticket} />
@@ -164,6 +183,8 @@ export default function TableTickets({regionId}) {
         </Table>
         
       </TableContainer>
+
+
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
