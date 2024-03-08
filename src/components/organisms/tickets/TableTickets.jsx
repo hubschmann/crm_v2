@@ -111,19 +111,17 @@ Row.propTypes = {
   ticket: PropTypes.object.isRequired,
 };
 
-export default function TableTickets() {
+export default function TableTickets({regionId}) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [connectionTickets, setConnectionTickets] = useState([]);
 
 
-  const regionId = 2
-
   useEffect(() => {
     API.getConnectionTicketsByRegion(regionId)
       .then(response => setConnectionTickets(response.data))
       .catch(error => console.error('Помилка завантаження списку заявок:', error));
-  }, []);
+  }, [regionId]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

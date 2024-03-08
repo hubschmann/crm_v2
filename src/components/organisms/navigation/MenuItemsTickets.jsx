@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
 
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
@@ -13,13 +14,22 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Menu, MenuItem } from '@mui/material';
 
-
+// API
+import API from '../../../database/api';
 
 const menuItemColor = 'white'
 const marginIconMenuItem = '15px'
 
-export default function MenuItemsTickets({ regions }) {
+export default function MenuItemsTickets() {
 
+    const [regions, setRegions] = useState([]);
+    const [selectedRegion, setSelectedRegion] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        API.getRegions().then(response => setRegions(response.data));
+    }, []);
+    
     // відповідає за відкриття підменю по натисканню на Створити заявку
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -126,31 +136,14 @@ export default function MenuItemsTickets({ regions }) {
                 >
                     <FormatListBulletedIcon/>
                 </ListItemIcon>
-                <ListItemText primary="Архів" sx={{ color: menuItemColor }} />
+                <ListItemText 
+                    primary="Архів" 
+                    sx={{ color: menuItemColor }}  
+                    onClick={() => {navigate("/archive-tickets")} }
+                />
             </ListItemButton>
         </ListItem>
-        <Menu
-            anchorEl={archiveRegionsMenuAnchorEl} // 
-            open={Boolean(archiveRegionsMenuAnchorEl)} 
-            onClose={handleCloseArchiveRegionsMenu}
-            anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-            }}
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-            }}
         
-            >
-            {regions.map((region) => (
-                <MenuItem key={region.id} onClick={handleCloseArchiveRegionsMenu}>
-                <Link to={`/archive-tickets?region=${region.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    {region.name}
-                </Link>
-                </MenuItem>
-            ))}
-        </Menu>
 
     </List>
   )

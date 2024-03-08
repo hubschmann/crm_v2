@@ -35,21 +35,16 @@ const sidebarColor = '#2196f3'
 const marginIconMenuItem = '15px'
 
 const Navigation = ({ children }) => {
-  const [regions, setRegions] = useState([]);
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
-  const navigate = useNavigate();
+    
+    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [isClosing, setIsClosing] = React.useState(false);
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        API.getRegions().then(response => setRegions(response.data));
-    }, []);
 
-  
-
-  const handleDrawerClose = () => {
-      setIsClosing(true);
-      setMobileOpen(false);
-  };
+    const handleDrawerClose = () => {
+        setIsClosing(true);
+        setMobileOpen(false);
+    };
 
   const handleDrawerTransitionEnd = () => {
       setIsClosing(false);
@@ -99,7 +94,7 @@ const Navigation = ({ children }) => {
         </Divider>
   
         {/* підключаю список пунктів меню повʼязаниїз заявками */}
-        <MenuItemsTickets regions={regions} />
+        <MenuItemsTickets />
   
       <Divider />
       <List>
