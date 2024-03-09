@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // З
 
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import ActiveTicketsPage from './pages/ActiveTicketsPage';
 
 import theme from './utils/theme';
 import ArchiveTicketsPage from './pages/ArchiveTicketsPage';
@@ -28,6 +29,10 @@ function App() {
                 path="new"
                 element={<New inputs={userInputs} title="Add New User" />}
               /> */}
+            </Route>
+            <Route path="active-tickets">
+              <Route index element={<ActiveTicketsPage />} />
+              
             </Route>
             {/* <Route path="products">
               <Route index element={<List />} />

@@ -49,7 +49,7 @@ export default function CalendarPicker({ handleDateChange }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ButtonDatePicker
-        label={value == null ? null : value.format('MM/DD/YYYY')}
+        label={value == null ? null : value.format('DD/MM/YYYY')}
         value={value}
         onChange={handleChange}
       />

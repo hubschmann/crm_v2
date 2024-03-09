@@ -117,7 +117,13 @@ export default function TableTickets({regionId}) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [connectionTickets, setConnectionTickets] = useState([]);
-  
+
+  // фіксуємо дату та фільтруємо список
+  const [selectedDate, setSelectedDate] = useState(null);
+  console.log(selectedDate)
+  const handleDateChange = (newValue) => {
+    setSelectedDate(newValue);
+  };
   
   // фільтрація у таблиці по селам
   const [selectedCity, setSelectedCity] = useState("");
@@ -162,7 +168,7 @@ export default function TableTickets({regionId}) {
               <TableCell align="right">Телефон</TableCell>
               <TableCell align="right">
                   <IconButton aria-label="calendar">
-                    <CalendarPicker />
+                    <CalendarPicker handleDateChange={handleDateChange} />
                   </IconButton>
                   Дата
               </TableCell>
@@ -173,12 +179,13 @@ export default function TableTickets({regionId}) {
           </TableHead>
           
           <TableBody>
-            {connectionTickets
-              .filter(ticket => !selectedCity || ticket.city.name.toLowerCase().includes(selectedCity.toLowerCase())) // Застосуйте фільтрацію
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((ticket) => (
-                <Row key={ticket.id} ticket={ticket} />
-              ))}
+          {connectionTickets
+            .filter(ticket => (!selectedCity || ticket.city.name.toLowerCase().includes(selectedCity.toLowerCase())) &&
+                            (!selectedDate || ticket.created === selectedDate.toDateString()))
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((ticket) => (
+              <Row key={ticket.id} ticket={ticket} />
+            ))}
           </TableBody>
         </Table>
         

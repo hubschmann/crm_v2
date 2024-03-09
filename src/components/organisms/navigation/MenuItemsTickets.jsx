@@ -113,7 +113,11 @@ export default function MenuItemsTickets() {
                 >
                     <ReportProblemIcon/>
                 </ListItemIcon>
-                <ListItemText primary="Актуальні" sx={{ color: menuItemColor }} />
+                <ListItemText 
+                    primary="Актуальні" 
+                    sx={{ color: menuItemColor }} 
+                    onClick={() => {navigate("/active-tickets")} }
+                />
             </ListItemButton>
         </ListItem>
 
