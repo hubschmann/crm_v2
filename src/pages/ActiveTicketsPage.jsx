@@ -6,6 +6,7 @@ import CardTicket from './../components/molecules/CardTicket'
 
 // API
 import API from './../database/api'
+import CityBarActiveTickets from '../components/molecules/CityBarActiveTickets';
 
 export default function ActiveTicketsPage() {
 
@@ -42,6 +43,9 @@ export default function ActiveTicketsPage() {
                 ))}
               </Box>
           <Divider sx={{ marginY:'10px' }}/>  
+            <Box component="main" sx={{flexGrow: 1, p: 3}}>
+                <CityBarActiveTickets />
+            </Box>
             <Box component="main" sx={{flexGrow: 1, p: 3}}>
                 <CardTicket />
             </Box>

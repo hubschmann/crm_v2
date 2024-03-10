@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import TableTickets from '../components/organisms/tickets/TableTickets'
 import MenuItemsTickets from '../components/organisms/navigation/MenuItemsTickets'
-import { Box, Chip, Container, Divider } from '@mui/material'
+import { Box, Chip, Container, Divider, Typography } from '@mui/material'
 
 
 // API
@@ -24,9 +24,10 @@ export default function ArchiveTicketsPage() {
   };
 
   return (
-    <Container sx={{ paddingTop: '20px'}}>
-      <h2>Архів заявок</h2>
-        <Box sx={{ display: "flex", flexDirection: "column"}}>
+    <>
+      
+        <Box sx={{ display: "flex", flexDirection: "column", marginTop: '50px'}}>
+        <Typography variant='h4'>Архів заявок</Typography>
         <Divider textAlign="left" sx={{ marginTop: '10px', marginBottom: '10px' }}>Групи</Divider>  
             <Box>
               {regions.map((region) => (
@@ -48,6 +49,6 @@ export default function ArchiveTicketsPage() {
             </Box>
             
         </Box>
-    </Container>
+    </>
   )
 }

@@ -3,13 +3,14 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Зміна імпорту на Routes та Route
 
+import theme from './utils/theme';
+
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
-import ActiveTicketsPage from './pages/ActiveTicketsPage';
-
-import theme from './utils/theme';
-import ArchiveTicketsPage from './pages/ArchiveTicketsPage';
 import Navigation from './components/organisms/navigation';
+import ActiveTicketsPage from './pages/ActiveTicketsPage';
+import ArchiveTicketsPage from './pages/ArchiveTicketsPage';
+import ArchiveRegistrationPage from './pages/ArchiveRegistrationPage';
 
 
 function App() {
@@ -34,14 +35,14 @@ function App() {
               <Route index element={<ActiveTicketsPage />} />
               
             </Route>
-            {/* <Route path="products">
-              <Route index element={<List />} />
-              <Route path=":productId" element={<Single />} />
-              <Route
+            <Route path="registration">
+              <Route index element={<ArchiveRegistrationPage />} />
+              {/* <Route path=":registrationId" element={<Single />} /> */}
+              {/* <Route
                 path="new"
                 element={<New inputs={productInputs} title="Add New Product" />}
-              />
-            </Route> */}
+              /> */}
+            </Route>
           </Route>
           </Routes>
         </Navigation>

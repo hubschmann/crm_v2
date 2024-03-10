@@ -41,7 +41,7 @@ function Row(props) {
     <React.Fragment>
       
       <TableRow sx={{ '& > *': { borderBottom: 'unset',
-      backgroundColor: ticket.status ? 'rgba(76, 175, 80, 0.2)' :'transparent'
+      backgroundColor: ticket.status ? 'transparent' : 'rgba(76, 175, 80, 0.2)' 
      },
     
       }}>
@@ -65,13 +65,13 @@ function Row(props) {
           </TableCell>
           <TableCell align="right">
                 {ticket.status ? (
-                  <IconButton aria-label="done">
-                    <CheckCircleOutline />
-                  </IconButton>
-                  ) : (
-                  <IconButton aria-label="not done">
+                    <IconButton aria-label="not done">
                     <ErrorOutline />
-                  </IconButton>
+                    </IconButton>
+                  ) : (
+                    <IconButton aria-label="done">
+                    <CheckCircleOutline />
+                    </IconButton>
                 )}
           </TableCell>
       </TableRow>
@@ -96,7 +96,7 @@ function Row(props) {
                   <Typography variant="h6" gutterBottom component="div">
                   Реєстрація:
                   </Typography>
-                  {ticket.status ? <TablePreviewRegistration /> : "Реєстрацій ще немає"}
+                  {ticket.status ? "Реєстрацій ще немає": <TablePreviewRegistration />}
                  
                 </Grid>
               </Grid>

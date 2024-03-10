@@ -22,13 +22,8 @@ const marginIconMenuItem = '15px'
 
 export default function MenuItemsTickets() {
 
-    const [regions, setRegions] = useState([]);
-    const [selectedRegion, setSelectedRegion] = useState(null);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        API.getRegions().then(response => setRegions(response.data));
-    }, []);
     
     // відповідає за відкриття підменю по натисканню на Створити заявку
     const [anchorEl, setAnchorEl] = useState(null);

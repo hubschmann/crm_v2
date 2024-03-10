@@ -28,6 +28,7 @@ import API from '../../../database/api';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoWhite from './../../../assets/img/logo.svg'
+import MenuItemsRegistrations from './MenuItemsRegistrations';
 
 const drawerWidth = 240;
 const menuItemColor = 'white'
@@ -81,34 +82,23 @@ const Navigation = ({ children }) => {
                         marginRight: marginIconMenuItem
                     }}
                 >
-            <HomeIcon/>
-        </ListItemIcon>
-        <ListItemText primary="Головна" sx={{ color: menuItemColor }} />
-    </ListItemButton>
-</ListItem>
+                    <HomeIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Головна" sx={{ color: menuItemColor }} />
+            </ListItemButton>
+        </ListItem>
         </List>
   
-        <Divider sx={{ 
-                    fontSize: '12px'
-                }}>Заявки
-        </Divider>
-  
+        <Divider sx={{fontSize: '12px'}}>Заявки</Divider>
+        
         {/* підключаю список пунктів меню повʼязаниїз заявками */}
-        <MenuItemsTickets />
+            <MenuItemsTickets />
   
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding onClick={handleDrawerClose}> {/* Додано обробник події для закриття меню */}
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+        <Divider sx={{fontSize: '12px'}}>Реєстрації</Divider>
+     
+         {/* підключаю список пунктів меню повʼязані їз реєстраціями */}
+            <MenuItemsRegistrations />
+     
     </div>
   );
   
@@ -139,6 +129,7 @@ const Navigation = ({ children }) => {
                   <Account />
               </Toolbar>
           </AppBar>
+
           <Box
               component="nav"
               sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}

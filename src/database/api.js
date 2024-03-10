@@ -7,7 +7,7 @@ const API = {
     getRegionTicketsCount: () => axios.get(`${BASE_URL}/tickets/api/region-ticket-count/`),
     getConnectionTickets: () => axios.get(`${BASE_URL}/tickets/api/connection-tickets/`),
     getConnectionTicketsByRegion: (regionId) => axios.get(`${BASE_URL}/tickets/api/connection-tickets-by-region/${regionId}/`),
-
+    getTicketsByCity: (regionId) => axios.get(`${BASE_URL}/tickets/api/tickets-by-city/${regionId}/`),
 }
 
 export default API
